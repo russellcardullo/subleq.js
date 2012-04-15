@@ -26,33 +26,44 @@
 
 
 
-cpu = {
-  programCounter: 0,
+function CPU() {
+  var programCounter = 0;
   //memory:         [14,12,3,12,13,6,12,12,9,12,12,0,0,0,2],
-  memory:         [10,9,3,9,11,6,9,9,-1,0,3,4],
-  run:            function() {
-    while (this.programCounter >= 0 && this.programCounter < this.memory.length) {
-      a = this.memory[this.programCounter];
-      b = this.memory[this.programCounter+1];
-      c = this.memory[this.programCounter+2];
+  var memory = [10,9,3,9,11,6,9,9,-1,0,3,4];
+  this.run = function() {
+    var halt = false;
+    while (halt === false) {
+      halt = this.step();
+    }
+  };
+  this.step = function() {
+    var halt = false;
+    if (programCounter >= 0 && programCounter < memory.length) {
+      a = memory[programCounter];
+      b = memory[programCounter+1];
+      c = memory[programCounter+2];
       if (a < 0 || b < 0) {
-        this.programCounter = -1;
+        programCounter = -1;
       } else {
-        this.memory[b] = this.memory[b] - this.memory[a];
-        if (this.memory[b] > 0) {
-          this.programCounter = this.programCounter + 3;
+        memory[b] = memory[b] - memory[a];
+        if (memory[b] > 0) {
+          programCounter = programCounter + 3;
         } else {
-          this.programCounter = c;
+          programCounter = c;
         }
       }
-      console.log('pc: ' + this.programCounter + ' a: ' + a + ' b: ' + b + ' c: ' + c + ' mem[a]: ' + this.memory[a] + ' mem[b]: ' + this.memory[b]);
+      console.log('pc: ' + programCounter + ' a: ' + a + ' b: ' + b + ' c: ' + c + ' mem[a]: ' + memory[a] + ' mem[b]: ' + memory[b]);
+    } else {
+      halt = true;
     }
     this.dumpMemory();
-  },
-  dumpMemory:  function() {
-    console.log(this.memory);
-  }
+    return halt;
+  };
+  this.dumpMemory = function() {
+    console.log(memory);
+  };
 }
 
+var cpu = new CPU();
 cpu.run();
 
