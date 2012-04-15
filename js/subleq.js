@@ -52,7 +52,7 @@ function CPU() {
           programCounter = c;
         }
       }
-      console.log('pc: ' + programCounter + ' a: ' + a + ' b: ' + b + ' c: ' + c + ' mem[a]: ' + memory[a] + ' mem[b]: ' + memory[b]);
+      console.log('pc: ' + programCounter + '   a: ' + a + '   b: ' + b + '   c: ' + c + '   mem[a]: ' + memory[a] + '   mem[b]: ' + memory[b]);
     } else {
       halt = true;
     }
@@ -60,7 +60,16 @@ function CPU() {
     return halt;
   };
   this.dumpMemory = function() {
-    console.log(memory);
+    var i = 0;
+    var outstr = i + ':  ';
+    for (i = 0; i < memory.length; i++) {
+      outstr += memory[i] + '  ';
+      if (i > 0 && i % 16 === 0) {
+        console.log(outstr);
+        outstr = i + ':  ';
+      }
+    }
+    console.log(outstr);
   };
 }
 
