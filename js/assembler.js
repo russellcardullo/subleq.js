@@ -3,22 +3,43 @@
 // Takes test subleq assembly language input and 
 // returns compiled binary array
 function assemble(input) {
+  var assembledInput = []
   lines = input.split('\n');
   for (var i = 0; i < lines.length; i++) {
-    // remove extra whitespace
-    var line = lines[i].replace(/\s+/g,' ').replace(/^\s/,'');
-    console.log(line);
-    var regex = /\b(\w+)\s+(\d+)\s*,\s*(\d+)\s*(?:,\s*)?(\d+)?/;
-    var match = regex.exec(line);
-    var instruction = match[1];
-    var operand1    = match[2];
-    var operand2    = match[3];
-    var operand3    = match[4];
-    console.log('ins: ' + instruction);
-    console.log('op1: ' + operand1);
-    console.log('op2: ' + operand2);
-    console.log('op3: ' + operand3);
+    var instruction = lexer(lines[i]);
+    console.log(instruction);
+    var parsedInstruction = parse(instruction);
+    console.log(parsedInstruction);
+    assembledInput = assembledInput.concat(parsedInstruction);
   }
+  return assembledInput;
+}
+
+function lexer(line) {
+  // remove extra whitespace
+  line = line.replace(/\s+/g,' ').replace(/^\s/,'');
+  var regex = /\b(\w+)\s+(\d+)\s*,\s*(\d+)\s*(?:,\s*)?(\d+)?/;
+  var match = regex.exec(line);
+  var operation   = match[1];
+  var operand1    = match[2];
+  var operand2    = match[3];
+  var operand3    = match[4];
+  return {
+    operation:   operation.toUpperCase(),
+    operand1:    operand1,
+    operand2:    operand2,
+    operand3:    operand3
+  }
+}
+
+function parse(instruction) {
+  var parsedInstruction = []
+  if (instruction.operation === 'SUBLEQ') {
+    parsedInstruction.push(parseInt(instruction.operand1));
+    parsedInstruction.push(parseInt(instruction.operand2));
+    parsedInstruction.push(parseInt(instruction.operand3));
+  }
+  return parsedInstruction;
 }
 
 input = "subleq 0,0,0 \n \
