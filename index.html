@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>subleq.js</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- external stylesheets -->
+
+    <!-- local stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+    <!-- jQuery via CDN -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"/> </script>
+    <!-- local scripts -->
+    <script src="js/cpu.js"></script>
+    <script src="js/assembler.js"></script>
+
+    <!-- favicons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span6">
+          <h3>Input Program</h3>
+            <div class="control-group">
+              <div class="controls">
+                <textarea class="input-xlarge" id="inputProgram" rows="10"></textarea>
+              </div>
+            </div>
+            <button onclick="assemble(document.getElementById('inputProgram').value)">Assemble</button>
+        </div>
+        <div class="span6">
+          <h3>Memory</h3>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+

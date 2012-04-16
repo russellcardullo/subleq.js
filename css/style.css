@@ -1,0 +1,36 @@
+
+body {
+  background-color: #000000;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  padding: 0;
+  width: 2em;
+  height: 2em;
+}
+
+td.alive {
+  background-color: #00882D;
+  color: #00882D;
+}
+
+td.dead {
+  background-color: #000000;
+  color: #000000;
+}
+
+.centerButton {
+  margin: 0px auto 0px auto;
+  text-align: center;
+}
+
