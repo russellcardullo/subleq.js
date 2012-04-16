@@ -27,15 +27,24 @@
       <div class="row">
         <div class="span6">
           <h3>Input Program</h3>
-            <div class="control-group">
-              <div class="controls">
-                <textarea class="input-xlarge" id="inputProgram" rows="10"></textarea>
-              </div>
+            <div class="program">
+              <textarea class="input-xlarge" id="inputProgram" rows="10"></textarea>
             </div>
             <button onclick="assemble(document.getElementById('inputProgram').value)">Assemble</button>
         </div>
         <div class="span6">
-          <h3>Memory</h3>
+          <h3>Machine</h3>
+            <form class="form-inline">
+              <label class="control-label" for="inputPC">Program Counter</label>
+              <input type="text" class="input-mini" id="inputPC">
+            </form>
+            <h4>Memory</h4>
+            <div class="memory">
+              <textarea class="input-xlarge" id="machineMemory" rows="10"></textarea>
+            </div>
+             
+            <button onclick="">Step</button>
+            <button onclick="">Run</button>
         </div>
       </div>
     </div>
