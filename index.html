@@ -17,6 +17,7 @@
     <!-- local scripts -->
     <script src="js/cpu.js"></script>
     <script src="js/assembler.js"></script>
+    <script src="js/io.js"></script>
 
     <!-- favicons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -30,13 +31,13 @@
             <div class="program">
               <textarea class="input-xlarge" id="inputProgram" rows="10"></textarea>
             </div>
-            <button onclick="assemble(document.getElementById('inputProgram').value)">Assemble</button>
+            <button onclick="assembleProgram(document.getElementById('inputProgram').value)">Assemble</button>
         </div>
         <div class="span6">
           <h3>Machine</h3>
             <form class="form-inline">
               <label class="control-label" for="inputPC">Program Counter</label>
-              <input type="text" class="input-mini" id="inputPC">
+              <input type="text" class="input-mini" id="inputPC" value="0">
             </form>
             <h4>Memory</h4>
             <div class="memory">
