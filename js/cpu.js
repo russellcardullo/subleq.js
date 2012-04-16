@@ -73,6 +73,6 @@ function CPU() {
   };
 }
 
-var cpu = new CPU();
-cpu.run();
+//var cpu = new CPU();
+//cpu.run();
 

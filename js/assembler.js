@@ -42,10 +42,10 @@ function parse(instruction) {
   return parsedInstruction;
 }
 
-input = "subleq 0,0,0 \n \
-         subleq 1,1,1";
+//input = "subleq 0,0,0 \n \
+//         subleq 1,1,1";
 
-console.log(assemble(input));
+//console.log(assemble(input));
 
 // ADD a, b == subleq a,Z
 //             subleq Z,b
