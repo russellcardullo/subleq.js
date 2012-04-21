@@ -8,9 +8,13 @@ function assemble(input) {
   for (var i = 0; i < lines.length; i++) {
     var instruction = lexer(lines[i]);
     console.log(instruction);
-    var parsedInstruction = parse(instruction);
-    console.log(parsedInstruction);
-    assembledInput = assembledInput.concat(parsedInstruction);
+    if (lexer === undefined) {
+      return undefined;
+    } else {
+      var parsedInstruction = parse(instruction);
+      console.log(parsedInstruction);
+      assembledInput = assembledInput.concat(parsedInstruction); 
+    }
   }
   return assembledInput;
 }
@@ -18,17 +22,23 @@ function assemble(input) {
 function lexer(line) {
   // remove extra whitespace
   line = line.replace(/\s+/g,' ').replace(/^\s/,'');
-  var regex = /\b(\w+)\s+(\d+)\s*,\s*(\d+)\s*(?:,\s*)?(\d+)?/;
+  console.log(line);
+  var regex = /\b(\w+)\s+(\d+)\s*(?:,\s*)?(\d+)?\s*(?:,\s*)?(\d+)?/;
   var match = regex.exec(line);
-  var operation   = match[1];
-  var operand1    = match[2];
-  var operand2    = match[3];
-  var operand3    = match[4];
-  return {
-    operation:   operation.toUpperCase(),
-    operand1:    operand1,
-    operand2:    operand2,
-    operand3:    operand3
+  console.log(match);
+  if (match === undefined) {
+    return undefined;
+  } else {
+    var operation   = match[1];
+    var operand1    = match[2];
+    var operand2    = match[3];
+    var operand3    = match[4];
+    return {
+      operation:   operation.toUpperCase(),
+      operand1:    operand1,
+      operand2:    operand2,
+      operand3:    operand3
+    };
   }
 }
 
@@ -38,6 +48,8 @@ function parse(instruction) {
     parsedInstruction.push(parseInt(instruction.operand1));
     parsedInstruction.push(parseInt(instruction.operand2));
     parsedInstruction.push(parseInt(instruction.operand3));
+  } else if (instruction.operation === 'DATA') {
+    parsedInstruction.push(parseInt(instruction.operand1));
   }
   return parsedInstruction;
 }
