@@ -26,8 +26,8 @@ function lexer(line) {
   var regex = /\b(\w+)\s+(\d+)\s*(?:,\s*)?(\d+)?\s*(?:,\s*)?(\d+)?/;
   var match = regex.exec(line);
   console.log(match);
-  if (match === undefined) {
-    return undefined;
+  if (match === undefined || match === null) {
+    return {};
   } else {
     var operation   = match[1];
     var operand1    = match[2];
