@@ -32,7 +32,7 @@
               <textarea class="input-xlarge" id="inputProgram" rows="10">
 SUBLEQ 10,9,3
 SUBLEQ 9,11,6
-SUBLEQ 9,9,1
+SUBLEQ 9,9,0
 DATA 0
 DATA 3
 DATA 4
@@ -51,7 +51,7 @@ DATA 4
               <textarea class="input-xlarge" id="machineMemory" rows="10"></textarea>
             </div>
              
-            <button onclick="">Step</button>
+            <button onclick="stepProgram(document.getElementById('inputPC').value,document.getElementById('machineMemory').value)">Step</button>
             <button onclick="">Run</button>
         </div>
       </div>

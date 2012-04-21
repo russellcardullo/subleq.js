@@ -26,10 +26,17 @@
 
 
 
-function CPU() {
-  var programCounter = 0;
+function CPU(programCounterIn, memoryIn ) {
+  var programCounter = programCounterIn;
   //memory:         [14,12,3,12,13,6,12,12,9,12,12,0,0,0,2],
-  var memory = [10,9,3,9,11,6,9,9,-1,0,3,4];
+  //var memory = [10,9,3,9,11,6,9,9,-1,0,3,4];
+  var memory = memoryIn;
+  this.getPC = function() {
+    return programCounter;
+  };
+  this.getMemory = function() {
+    return memory;
+  };
   this.run = function() {
     var halt = false;
     while (halt === false) {
