@@ -9,16 +9,18 @@ function assemble(input) {
   if (symbolTable === undefined) {
     return undefined;
   }
+  var position = 0;
   for (var i = 0; i < lines.length; i++) {
     var instruction = lexer(lines[i]);
     console.log(instruction);
     if (lexer === undefined) {
       return undefined;
     } else {
-      var parsedInstruction = parse(instruction,symbolTable);
+      var parsedInstruction = parse(instruction,symbolTable,position);
       console.log(parsedInstruction);
       assembledInput = assembledInput.concat(parsedInstruction); 
     }
+    position += getInstructionSize(instruction);
   }
   return assembledInput;
 }
@@ -39,7 +41,6 @@ function buildSymbolTable(lines) {
     var size = getInstructionSize(instruction);
     location += size; 
   }
-  console.log(symbolTable);
   return symbolTable;
 }
 
@@ -57,7 +58,7 @@ function lexer(line) {
   // remove extra whitespace
   line = line.replace(/\s+/g,' ').replace(/^\s/,'');
   console.log(line);
-  var regex = /(\w+:)?\s*(\w+)\s+(\w+)\s*(?:,\s*)?(\w+)?\s*(?:,\s*)?(\w+)?(?:;.*)?/;
+  var regex = /(\w+:)?\s*(\w+)?\s*(\w+)\s*(?:,\s*)?(\w+)?\s*(?:,\s*)?(\w+)?(?:;.*)?/;
   var match = regex.exec(line);
   console.log(match);
   if (match === undefined || match === null) {
@@ -78,12 +79,17 @@ function lexer(line) {
   }
 }
 
-function parse(instruction,symbolTable) {
+function parse(instruction,symbolTable,position) {
   var parsedInstruction = []
   if (instruction.operation === 'SUBLEQ') {
     parsedInstruction.push(operandValue(instruction.operand1,symbolTable));
     parsedInstruction.push(operandValue(instruction.operand2,symbolTable));
-    parsedInstruction.push(operandValue(instruction.operand3,symbolTable));
+    if (instruction.operand3 !== undefined) {
+      parsedInstruction.push(operandValue(instruction.operand3,symbolTable)); 
+    } else {
+      // assume next instruction
+      parsedInstruction.push(position + getInstructionSize(instruction));
+    }
   } else if (instruction.operation === 'DATA') {
     parsedInstruction.push(operandValue(instruction.operand1,symbolTable));
   }
