@@ -55,10 +55,14 @@ function getInstructionSize(instruction) {
 }
 
 function lexer(line) {
+  // strip comments
+  line = line.replace(/;.*$/,'');
+  // convert comma to whitespace
+  line = line.replace(/,/g,' ')
   // remove extra whitespace
-  line = line.replace(/\s+/g,' ').replace(/^\s/,'');
+  line = line.replace(/\s+/g,' ').replace(/^\s/,'').replace(/\s+$/,'');
   console.log(line);
-  var regex = /(\w+:)?\s*(\w+)?\s*(\w+)\s*(?:,\s*)?(\w+)?\s*(?:,\s*)?(\w+)?(?:;.*)?/;
+  var regex = /(\w+:)?\s*(\w+)?\s*(\w+)?\s*(\w+)?\s*(\w+)?/;
   var match = regex.exec(line);
   console.log(match);
   if (match === undefined || match === null) {
@@ -66,12 +70,15 @@ function lexer(line) {
   } else {
     var label       = match[1];
     var operation   = match[2];
+    if (operation !== undefined) {
+      operation = operation.toUpperCase();
+    }
     var operand1    = match[3];
     var operand2    = match[4];
     var operand3    = match[5];
     return {
       label:       label,
-      operation:   operation.toUpperCase(),
+      operation:   operation,
       operand1:    operand1,
       operand2:    operand2,
       operand3:    operand3
