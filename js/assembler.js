@@ -23,17 +23,19 @@ function lexer(line) {
   // remove extra whitespace
   line = line.replace(/\s+/g,' ').replace(/^\s/,'');
   console.log(line);
-  var regex = /\b(\w+)\s+(\d+)\s*(?:,\s*)?(\d+)?\s*(?:,\s*)?(\d+)?/;
+  var regex = /(\w+:)?\s*(\w+)\s+(\d+)\s*(?:,\s*)?(\d+)?\s*(?:,\s*)?(\d+)?(?:;.*)?/;
   var match = regex.exec(line);
   console.log(match);
   if (match === undefined || match === null) {
     return {};
   } else {
-    var operation   = match[1];
-    var operand1    = match[2];
-    var operand2    = match[3];
-    var operand3    = match[4];
+    var label       = match[1];
+    var operation   = match[2];
+    var operand1    = match[3];
+    var operand2    = match[4];
+    var operand3    = match[5];
     return {
+      label:       label,
       operation:   operation.toUpperCase(),
       operand1:    operand1,
       operand2:    operand2,
