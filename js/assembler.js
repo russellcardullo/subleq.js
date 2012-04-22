@@ -3,27 +3,65 @@
 // Takes test subleq assembly language input and 
 // returns compiled binary array
 function assemble(input) {
-  var assembledInput = []
+  var assembledInput = [];
   lines = input.split('\n');
+  var symbolTable = buildSymbolTable(lines);
+  if (symbolTable === undefined) {
+    return undefined;
+  }
   for (var i = 0; i < lines.length; i++) {
     var instruction = lexer(lines[i]);
     console.log(instruction);
     if (lexer === undefined) {
       return undefined;
     } else {
-      var parsedInstruction = parse(instruction);
+      var parsedInstruction = parse(instruction,symbolTable);
       console.log(parsedInstruction);
       assembledInput = assembledInput.concat(parsedInstruction); 
     }
   }
   return assembledInput;
 }
+function buildSymbolTable(lines) {
+  var location = 0;
+  var symbolTable = {};
+  for (var i = 0; i < lines.length; i++) {
+    var instruction = lexer(lines[i]);
+    if (instruction.label !== undefined) {
+      var symbol = instruction.label.replace(':','');
+      if (symbolTable[symbol] === undefined) {
+        symbolTable[symbol] = location;
+      } else {
+        // error - symbol already defined
+        return undefined;
+      }
+    }
+    var size = getInstructionSize(instruction);
+    location += size; 
+  }
+  console.log(symbolTable);
+  return symbolTable;
+}
+
+function getInstructionSize(instruction) {
+  var size = 0;
+  if (instruction.operand1 !== undefined) {
+    size += 1;
+  }
+  if (instruction.operand2 !== undefined) {
+    size += 1;
+  }
+  if (instruction.operand3 !== undefined) {
+    size += 1;
+  }
+  return size;
+}
 
 function lexer(line) {
   // remove extra whitespace
   line = line.replace(/\s+/g,' ').replace(/^\s/,'');
   console.log(line);
-  var regex = /(\w+:)?\s*(\w+)\s+(\d+)\s*(?:,\s*)?(\d+)?\s*(?:,\s*)?(\d+)?(?:;.*)?/;
+  var regex = /(\w+:)?\s*(\w+)\s+(\w+)\s*(?:,\s*)?(\w+)?\s*(?:,\s*)?(\w+)?(?:;.*)?/;
   var match = regex.exec(line);
   console.log(match);
   if (match === undefined || match === null) {
@@ -44,16 +82,34 @@ function lexer(line) {
   }
 }
 
-function parse(instruction) {
+function parse(instruction,symbolTable) {
   var parsedInstruction = []
   if (instruction.operation === 'SUBLEQ') {
-    parsedInstruction.push(parseInt(instruction.operand1));
-    parsedInstruction.push(parseInt(instruction.operand2));
-    parsedInstruction.push(parseInt(instruction.operand3));
+    parsedInstruction.push(operandValue(instruction.operand1,symbolTable));
+    parsedInstruction.push(operandValue(instruction.operand2,symbolTable));
+    parsedInstruction.push(operandValue(instruction.operand3,symbolTable));
   } else if (instruction.operation === 'DATA') {
-    parsedInstruction.push(parseInt(instruction.operand1));
+    parsedInstruction.push(operandValue(instruction.operand1,symbolTable));
   }
   return parsedInstruction;
+}
+
+function operandValue(operand,symbolTable) {
+  if (operand === undefined) {
+    return null;
+  }
+  var value = parseInt(operand);
+  if (isNaN(value)) {
+    console.log('Looking up ' + operand + ' in symbol table');
+    if (symbolTable[operand] !== undefined) {
+      value = symbolTable[operand];
+      console.log('Value is ' + value);
+    } else {
+     console.log('Could not find ' + operand);
+     return undefined;
+    }
+  }
+  return value;
 }
 
 //input = "subleq 0,0,0 \n \

@@ -1,9 +1,13 @@
 
 function assembleProgram(input) {
   var program = assemble(input);
-  var programText = program.join(' ');
-  document.getElementById('inputPC').value = 0;
-  document.getElementById('machineMemory').value = programText;
+  if (program !== undefined) {
+    var programText = program.join(' ');
+    document.getElementById('inputPC').value = 0;
+    document.getElementById('machineMemory').value = programText;
+  } else {
+    alert ('error assembling');
+  }
   
 }
 
