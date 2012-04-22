@@ -45,14 +45,10 @@ function buildSymbolTable(lines) {
 
 function getInstructionSize(instruction) {
   var size = 0;
-  if (instruction.operand1 !== undefined) {
-    size += 1;
-  }
-  if (instruction.operand2 !== undefined) {
-    size += 1;
-  }
-  if (instruction.operand3 !== undefined) {
-    size += 1;
+  if (instruction.operation === 'SUBLEQ') {
+    size = 3;
+  } else if (instruction.operation === 'DATA') {
+    size = 1;
   }
   return size;
 }
