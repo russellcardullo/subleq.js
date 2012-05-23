@@ -37,3 +37,23 @@ function constructCPU(inputPC, inputMemory) {
   var cpu = new CPU(PC,memory);
   return cpu; 
 }
+
+function loadProgram(program) {
+  $('#inputProgram').val(examplePrograms[program]);
+
+}
+
+var examplePrograms = {
+   'add.subleq': "; Calculates B = A + B forever\n" +
+                 "start:\n" +
+                 "SUBLEQ A,Z\n" +
+                 "SUBLEQ Z,B\n" +
+                 "SUBLEQ Z,Z,start\n" +
+                 "Z: DATA 0\n" +
+                 "A: DATA 3\n" +
+                 "B: DATA 4\n",
+   'sum.subleq': "; Sums numbers 1 through 10\n"
+}
+
+              
+

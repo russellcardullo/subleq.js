@@ -30,17 +30,16 @@
           <h3>Input Program</h3>
             <div class="program">
               <textarea class="input-xlarge" id="inputProgram" rows="10">
-; Calculates B = A + B forever
-start:
-SUBLEQ A,Z
-SUBLEQ Z,B
-SUBLEQ Z,Z,start
-Z: DATA 0
-A: DATA 3
-B: DATA 4
               </textarea>
             </div>
             <button onclick="assembleProgram($('#inputProgram').val())">Assemble</button>
+            <div class="examplePrograms">
+              Sample Programs
+              <select id="selectProgram" onChange="loadProgram($('#selectProgram').val());">
+                <option>add.subleq</option>
+                <option>sum.subleq</option>
+              </select>
+            </div>
         </div>
         <div class="span6">
           <h3>Machine</h3>
