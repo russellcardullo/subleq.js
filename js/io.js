@@ -1,15 +1,15 @@
 
 function resetMachineState() {
-  document.getElementById('inputPC').value = 0;
-  document.getElementById('machineMemory').value = '';
+  $('#inputPC').val(0);
+  $('#machineMemory').val('');
 }
 
 function assembleProgram(input) {
   var program = assemble(input);
   if (program !== undefined) {
     var programText = program.join(' ');
-    document.getElementById('inputPC').value = 0;
-    document.getElementById('machineMemory').value = programText;
+    $('#inputPC').val(0);
+    $('#machineMemory').val(programText);
   } else {
     alert ('error assembling');
   }
@@ -23,8 +23,8 @@ function stepProgram(inputPC, inputMemory, steps) {
   }
   var outputPC = cpu.getPC();
   var outputMemory = cpu.getMemory().join(' ');
-  document.getElementById('inputPC').value = outputPC;
-  document.getElementById('machineMemory').value = outputMemory;
+  $('#inputPC').val(outputPC);
+  $('#machineMemory').val(outputMemory);
 }
 
 function constructCPU(inputPC, inputMemory) {

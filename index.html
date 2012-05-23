@@ -40,7 +40,7 @@ A: DATA 3
 B: DATA 4
               </textarea>
             </div>
-            <button onclick="assembleProgram(document.getElementById('inputProgram').value)">Assemble</button>
+            <button onclick="assembleProgram($('#inputProgram').val())">Assemble</button>
         </div>
         <div class="span6">
           <h3>Machine</h3>
@@ -53,8 +53,8 @@ B: DATA 4
               <textarea class="input-xlarge" id="machineMemory" rows="10"></textarea>
             </div>
              
-            <button onclick="stepProgram(document.getElementById('inputPC').value,document.getElementById('machineMemory').value,1)">Step</button>
-            <button onclick="stepProgram(document.getElementById('inputPC').value,document.getElementById('machineMemory').value,10)">Step x10</button>
+            <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),1)">Step</button>
+            <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),10)">Step x10</button>
             <button onclick="resetMachineState()">Reset</button>
         </div>
       </div>
