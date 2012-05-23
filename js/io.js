@@ -11,9 +11,11 @@ function assembleProgram(input) {
   
 }
 
-function stepProgram(inputPC, inputMemory) {
+function stepProgram(inputPC, inputMemory, steps) {
   var cpu = constructCPU(inputPC, inputMemory);
-  cpu.step();
+  for (var i = 0; i < steps; i++) {
+    cpu.step();
+  }
   var outputPC = cpu.getPC();
   var outputMemory = cpu.getMemory().join(' ');
   document.getElementById('inputPC').value = outputPC;
