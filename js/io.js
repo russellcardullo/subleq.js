@@ -1,4 +1,9 @@
 
+function resetMachineState() {
+  document.getElementById('inputPC').value = 0;
+  document.getElementById('machineMemory').value = '';
+}
+
 function assembleProgram(input) {
   var program = assemble(input);
   if (program !== undefined) {
