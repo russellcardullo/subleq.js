@@ -53,7 +53,19 @@ var examplePrograms = {
                  "A: DATA 3\n" +
                  "B: DATA 4\n" +
                  "end:\n",
-   'sum.subleq': "; Sums numbers 1 through 10\n"
+   'sum.subleq': "; Sums numbers 1 through 10\n" +
+                 "start:\n" +
+                 "; Compute C=C+B\n" +
+                 "SUBLEQ B,Z\n" +
+                 "SUBLEQ Z,C\n" +
+                 "; Compute B=B-A\n" +
+                 "SUBLEQ A,B,end\n" +
+                 "SUBLEQ Z,Z,start\n" +
+                 "Z: DATA 0\n" +
+                 "A: DATA 1\n" +
+                 "B: DATA 10\n" +
+                 "C: DATA 0\n" +
+                 "end:\n"
 }
 
               
