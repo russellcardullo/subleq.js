@@ -44,14 +44,15 @@ function loadProgram(program) {
 }
 
 var examplePrograms = {
-   'add.subleq': "; Calculates B = A + B forever\n" +
+   'add.subleq': "; Calculates B = A + B\n" +
                  "start:\n" +
                  "SUBLEQ A,Z\n" +
                  "SUBLEQ Z,B\n" +
-                 "SUBLEQ Z,Z,start\n" +
+                 "SUBLEQ Z,Z,end\n" +
                  "Z: DATA 0\n" +
                  "A: DATA 3\n" +
-                 "B: DATA 4\n",
+                 "B: DATA 4\n" +
+                 "end:\n",
    'sum.subleq': "; Sums numbers 1 through 10\n"
 }
 
