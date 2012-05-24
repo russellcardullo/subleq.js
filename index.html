@@ -52,6 +52,10 @@
             <div class="memory">
               <textarea class="input-xlarge" id="machineMemory" rows="10"></textarea>
             </div>
+            <div class="cycleCount">
+              Cycles since reset:
+              <span id="cycles">0</span>
+            </div>
              
             <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),1)">Step</button>
             <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),10)">Step x10</button>

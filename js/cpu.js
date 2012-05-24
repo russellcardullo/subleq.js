@@ -1,35 +1,6 @@
 
-// ADD a, b == subleq a,Z
-//             subleq Z,b
-//             subleq Z,Z
-
-//0  ADD 3, 4 == subleq a,Z (10,9,3)
-//3              subleq Z,b (9,11,6)
-//6              subleq Z,Z (9,9,-1)
-//9  Z           0
-//10 a           3
-//11 b           4
-
-//memory = [10,9,3,9,11,6,9,9,-1,0,3,4]
-
-// start
-//0 ADD 2,A   == subleq 2,Z (14,12,3)
-//3           == subleq Z,A (12,13,6)
-//6           == subleq Z,Z (12,12,9)
-//9 JMP start == subleq Z,Z,start (12,12,0)
-//12 Z          (0)
-//13 A          (0)
-//14 2          (2)
-
-//memory = [14,12,3,12,13,6,12,12,9,12,12,0,0,0,2]
-
-
-
-
 function CPU(programCounterIn, memoryIn ) {
   var programCounter = programCounterIn;
-  //memory:         [14,12,3,12,13,6,12,12,9,12,12,0,0,0,2],
-  //var memory = [10,9,3,9,11,6,9,9,-1,0,3,4];
   var memory = memoryIn;
   this.getPC = function() {
     return programCounter;
@@ -80,6 +51,4 @@ function CPU(programCounterIn, memoryIn ) {
   };
 }
 
-//var cpu = new CPU();
-//cpu.run();
 

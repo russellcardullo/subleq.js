@@ -2,6 +2,7 @@
 function resetMachineState() {
   $('#inputPC').val(0);
   $('#machineMemory').val('');
+  $('#cycles').html('0');
 }
 
 function assembleProgram(input) {
@@ -10,6 +11,7 @@ function assembleProgram(input) {
     var programText = program.join(' ');
     $('#inputPC').val(0);
     $('#machineMemory').val(programText);
+    $('#cycles').html('0');
   } else {
     alert ('error assembling');
   }
@@ -17,14 +19,20 @@ function assembleProgram(input) {
 }
 
 function stepProgram(inputPC, inputMemory, steps) {
+  var cycles = $('#cycles').html();
   var cpu = constructCPU(inputPC, inputMemory);
+  var halt = false;
   for (var i = 0; i < steps; i++) {
-    cpu.step();
+    halt = cpu.step();
+    if (! halt) {
+      cycles++;
+    }
   }
   var outputPC = cpu.getPC();
   var outputMemory = cpu.getMemory().join(' ');
   $('#inputPC').val(outputPC);
   $('#machineMemory').val(outputMemory);
+  $('#cycles').html(cycles);
 }
 
 function constructCPU(inputPC, inputMemory) {
