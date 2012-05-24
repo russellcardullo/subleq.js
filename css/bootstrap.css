@@ -673,9 +673,11 @@ input[type="file"]:focus, input[type="checkbox"]:focus, select:focus {
 }
 .input-xlarge {
   width: 270px;
+  height: 270px;
 }
 .input-xxlarge {
-  width: 530px;
+  width: 400px;
+  height: 400px;
 }
 input[class*="span"],
 select[class*="span"],
