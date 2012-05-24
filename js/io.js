@@ -91,26 +91,56 @@ function memoryTableToArray(tableid) {
 var examplePrograms = {
    'add.subleq': "; Calculates B = A + B\n" +
                  "start:\n" +
+                 "\n" +
                  "SUBLEQ A,Z\n" +
                  "SUBLEQ Z,B\n" +
                  "SUBLEQ Z,Z,end\n" +
+                 "\n" +
+                 "; data\n" +
                  "Z: DATA 0\n" +
                  "A: DATA 3\n" +
                  "B: DATA 4\n" +
                  "end:\n",
-   'sum.subleq': "; Sums numbers 1 through 10\n" +
+   'sum.subleq': "; Summmation: B = sum(1..A)\n" +
                  "start:\n" +
-                 "; Compute C=C+B\n" +
+                 "\n" +
+                 "; Compute B=B+A\n" +
+                 "SUBLEQ A,Z\n" +
+                 "SUBLEQ Z,B\n" +
+                 "\n" +
+                 "; Compute A=A-1\n" +
+                 "SUBLEQ one,A,end\n" +
+                 "SUBLEQ Z,Z,start\n" +
+                 "\n" +
+                 "; data\n" +
+                 "Z: DATA 0\n" +
+                 "one: DATA 1\n" +
+                 "A: DATA 10\n" +
+                 "B: DATA 0\n" +
+                 "end:\n",
+   'mult.subleq': "; Multiplies two numbersi: C = A * B\n" +
+                 "start:\n" +
+                 "\n" +
+                 "SUBLEQ Z,one,end ; multiplier is zero\n" +
+                 "\n" +
+                 "loop:\n" +
+                 "; C = C + B\n" +
                  "SUBLEQ B,Z\n" +
                  "SUBLEQ Z,C\n" +
-                 "; Compute B=B-A\n" +
-                 "SUBLEQ A,B,end\n" +
-                 "SUBLEQ Z,Z,start\n" +
+                 "SUBLEQ Z,Z\n" +
+                 "\n" +
+                 "; A = A - 1\n" +
+                 "SUBLEQ one,A,end\n" +
+                 "SUBLEQ Z,Z,loop\n" +
+                 "\n" +
+                 "; data\n" +
                  "Z: DATA 0\n" +
-                 "A: DATA 1\n" +
-                 "B: DATA 10\n" +
+                 "one: DATA 1\n" +
+                 "A: DATA 6\n" +
+                 "B: DATA 7\n" +
                  "C: DATA 0\n" +
-                 "end:\n"
+                 "end:\n", 
+
 }
 
               
