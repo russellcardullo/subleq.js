@@ -1,16 +1,16 @@
 
 function resetMachineState() {
   $('#inputPC').val(0);
-  $('#machineMemory').val('');
+  $('#memoryDisplay').html(memoryArrayToTable([]));
   $('#cycles').html('0');
 }
 
 function assembleProgram(input) {
   var program = assemble(input);
   if (program !== undefined) {
-    var programText = program.join(' ');
+    var memoryHTML = memoryArrayToTable(program);
     $('#inputPC').val(0);
-    $('#machineMemory').val(programText);
+    $('#memoryDisplay').html(memoryHTML);
     $('#cycles').html('0');
   } else {
     alert ('error assembling');
@@ -18,9 +18,9 @@ function assembleProgram(input) {
   
 }
 
-function stepProgram(inputPC, inputMemory, steps) {
+function stepProgram(inputPC, inputMemoryId, steps) {
   var cycles = $('#cycles').html();
-  var cpu = constructCPU(inputPC, inputMemory);
+  var cpu = constructCPU(inputPC, inputMemoryId);
   var halt = false;
   for (var i = 0; i < steps; i++) {
     halt = cpu.step();
@@ -29,26 +29,63 @@ function stepProgram(inputPC, inputMemory, steps) {
     }
   }
   var outputPC = cpu.getPC();
-  var outputMemory = cpu.getMemory().join(' ');
+  var memoryHTML = memoryArrayToTable(cpu.getMemory());
   $('#inputPC').val(outputPC);
-  $('#machineMemory').val(outputMemory);
+  $('#memoryDisplay').html(memoryHTML);
   $('#cycles').html(cycles);
 }
 
-function constructCPU(inputPC, inputMemory) {
+function constructCPU(inputPC, inputMemoryId) {
   var PC = parseInt(inputPC);
-  var memory = [];
-  memStrArray = inputMemory.split(' ');
-  for (var i = 0; i < memStrArray.length; i++) {
-    memory.push(parseInt(memStrArray[i]));
-  }
+  var memory = memoryTableToArray(inputMemoryId);
   var cpu = new CPU(PC,memory);
   return cpu; 
 }
 
 function loadProgram(program) {
   $('#inputProgram').val(examplePrograms[program]);
+}
 
+function memoryArrayToTable(array) {
+  outputHTML = "<table class='table table-bordered table-condensed' id='memoryTable'>";
+  var columnLength = 8;
+  var i = 0;
+  for (i = 0; i < array.length; i++) {
+    if (i % columnLength === 0) {
+      outputHTML += "<tr>";
+    }
+    outputHTML += "<td>" + array[i] + "</td>";
+    if (i % columnLength === (columnLength - 1)) {
+      outputHTML += "</tr>";
+    } 
+  }
+  // pad table so that there is an even number of cells
+  while (i % columnLength !== 0) {
+    outputHTML += "<td></td>"
+    if (i % columnLength === (columnLength - 1)) {
+      outputHTML += "</tr>";
+    }
+    i++;
+  } 
+  outputHTML += "</table>";
+  return outputHTML;
+}
+
+function memoryTableToArray(tableid) {
+  var selector = "table#" + tableid + " tr";
+  var memory = [];
+  $(selector).each(function() {
+    var tableData = $(this).find('td');
+    if (tableData.length > 0) {
+      tableData.each(function() {
+        var val = parseInt($(this).text());
+        if (val !== undefined && ! isNaN(val))  {
+          memory.push(val);
+        }
+      });
+    }
+  });
+  return memory;
 }
 
 var examplePrograms = {

@@ -85,13 +85,13 @@
               </div>
             </form>
             <h4>Memory</h4>
-            <div class="memory">
-              <textarea class="input-xlarge" id="machineMemory" rows="10"></textarea>
+            <div class="memory" id="memoryDisplay">
+              <table class="table table-bordered table-condensed" id="memoryTable"></table>
             </div>
              
-            <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),1)">Step</button>
-            <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),10)">Step x10</button>
-            <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),100)">Step x100</button>
+            <button onclick="stepProgram($('#inputPC').val(),'memoryTable',1)">Step</button>
+            <button onclick="stepProgram($('#inputPC').val(),'memoryTable',10)">Step x10</button>
+            <button onclick="stepProgram($('#inputPC').val(),'memoryTable',100)">Step x100</button>
             <button onclick="resetMachineState()">Reset</button>
         </div>
       </div>
