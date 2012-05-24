@@ -71,16 +71,22 @@
         <div class="span6">
           <h3>Machine</h3>
             <form class="form-inline">
-              <label class="control-label" for="inputPC">Program Counter</label>
-              <input type="text" class="input-mini" id="inputPC" value="0">
+              <div class="control-group">
+                <div class="controls">
+                  <label class="control-label" for="inputPC">Program Counter</label>
+                  <input type="text" class="input-mini" id="inputPC" value="0">
+                </div>
+              </div>
+              <div class="control-group">
+                <div class="controls">
+                  <label class="control-label">Cycles since reset</label>
+                  <span class="input-mini uneditable-input" id="cycles">0</span>
+                </div>
+              </div>
             </form>
             <h4>Memory</h4>
             <div class="memory">
               <textarea class="input-xlarge" id="machineMemory" rows="10"></textarea>
-            </div>
-            <div class="cycleCount">
-              Cycles since reset:
-              <span id="cycles">0</span>
             </div>
              
             <button onclick="stepProgram($('#inputPC').val(),$('#machineMemory').val(),1)">Step</button>
