@@ -109,8 +109,8 @@ var examplePrograms = {
                  "SUBLEQ Z,B\n" +
                  "\n" +
                  "; Compute A=A-1\n" +
-                 "SUBLEQ one,A,end\n" +
-                 "SUBLEQ Z,Z,start\n" +
+                 "SUBLEQ one,A,end ; jump to the end if A <= 0\n" +
+                 "SUBLEQ Z,Z,start ; loop if not finished\n" +
                  "\n" +
                  "; data\n" +
                  "Z: DATA 0\n" +
@@ -118,10 +118,10 @@ var examplePrograms = {
                  "A: DATA 10\n" +
                  "B: DATA 0\n" +
                  "end:\n",
-   'mult.subleq': "; Multiplies two numbersi: C = A * B\n" +
+   'mult.subleq': "; Multiplies two numbers: C = A * B\n" +
                  "start:\n" +
                  "\n" +
-                 "SUBLEQ Z,one,end ; multiplier is zero\n" +
+                 "SUBLEQ Z,one,end ; handle case where multiplier is zero\n" +
                  "\n" +
                  "loop:\n" +
                  "; C = C + B\n" +
@@ -130,8 +130,8 @@ var examplePrograms = {
                  "SUBLEQ Z,Z\n" +
                  "\n" +
                  "; A = A - 1\n" +
-                 "SUBLEQ one,A,end\n" +
-                 "SUBLEQ Z,Z,loop\n" +
+                 "SUBLEQ one,A,end ; jump to the end if A <= 0\n" +
+                 "SUBLEQ Z,Z,loop  ; loop if not finished\n" +
                  "\n" +
                  "; data\n" +
                  "Z: DATA 0\n" +

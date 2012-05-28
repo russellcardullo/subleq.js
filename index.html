@@ -72,6 +72,12 @@
         <p>subleq.js is a simulator for the <a href="http://esolangs.org/wiki/Subleq">SUBLEQ</a> language.  The interpreter code is written in Javascript and runs entirely in the browser.</p>
         <hr/>
         <h4>Usage</h4>
+          <ol>
+            <li>Enter a program in the Input Program box.  Or select an example from the top menu.</li>
+            <li>Click assemble.  This will load the program into the simulator memory.</li>
+            <li>Step through execution using any of the step sizes.</li>
+          </ol>
+        <h4>Language constructs</h4>
           <h5>SUBLEQ</h5>
             <p>The language accepts a single command:</p>
             <pre> SUBLEQ A,B,C</pre>
@@ -94,8 +100,7 @@ foo: DATA 6 ; you can also label the location of data elements </pre>
         <div class="span6">
           <h3>Input Program</h3>
             <div class="program">
-              <textarea class="input-xxlarge" id="inputProgram" rows="10">
-              </textarea>
+              <textarea class="input-xxlarge" id="inputProgram" rows="10"></textarea>
             </div>
             <button onclick="assembleProgram($('#inputProgram').val())">Assemble</button>
         </div>
@@ -120,7 +125,7 @@ foo: DATA 6 ; you can also label the location of data elements </pre>
               <table class="table table-bordered table-condensed" id="memoryTable"></table>
             </div>
              
-            <button onclick="stepProgram($('#inputPC').val(),'memoryTable',1)">Step</button>
+            <button onclick="stepProgram($('#inputPC').val(),'memoryTable',1)">Step x1</button>
             <button onclick="stepProgram($('#inputPC').val(),'memoryTable',10)">Step x10</button>
             <button onclick="stepProgram($('#inputPC').val(),'memoryTable',100)">Step x100</button>
             <button onclick="resetMachineState()">Reset</button>
