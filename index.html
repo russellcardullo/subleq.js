@@ -66,12 +66,12 @@
             <pre> SUBLEQ A,B,C</pre>
             <p>This subtracts the contents of memory address A from memory address B and stores the result in B.  If this result is less than or equal to zero then branch to the location C.</p>
           <h5>Comments</h5>
-            <p>Anything after a semicolon until a linebreak is a comment and ignored</p>
+            <p>Anything after a semicolon until a linebreak is a comment and ignored:</p>
             <pre>; comments extend to the end of the line</pre>
           <h5>Labels</h5>
-            <p>You can use labels to make memory addressing easier</p>
-            <pre>baz:               ; any word followed by a colon
-SUBLEQ foo,bar,baz ; subtract foo from bar and jump to baz is LEQ zero</pre>
+            <p>You can use labels to make memory addressing easier:</p>
+            <pre>baz:               ; a label is any word followed by a colon
+SUBLEQ foo,bar,baz ; subtract foo from bar and jump to baz if LEQ zero</pre>
           <h5>Data</h5>
             <p>Use the DATA statement to define a word in memory.</p>
             <pre>DATA 5      ; emits the value 5 at this location in memory
