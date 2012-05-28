@@ -48,6 +48,17 @@
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
               <li><a data-toggle="modal" href="#about">About</a></li>
+              <li class="dropdown" id="examples">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="examples">
+                  Examples
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a onclick="loadProgram('add.subleq');" href="#">Add two numbers together</a></li>
+                  <li><a onclick="loadProgram('mult.subleq');" href="#">Multiply two numbers</a></li>
+                  <li><a onclick="loadProgram('sum.subleq');" href="#">Sum a series of numbers</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>
@@ -87,15 +98,6 @@ foo: DATA 6 ; you can also label the location of data elements </pre>
               </textarea>
             </div>
             <button onclick="assembleProgram($('#inputProgram').val())">Assemble</button>
-            <div class="examplePrograms">
-              Sample Programs
-              <select id="selectProgram" onChange="loadProgram($('#selectProgram').val());">
-                <option value="" selected="selected"></option>
-                <option value="add.subleq">Add two numbers together</option>
-                <option value="mult.subleq">Multiply two numbers</option>
-                <option value="sum.subleq">Sum series of numbers</option>
-              </select>
-            </div>
         </div>
         <div class="span6">
           <h3>Machine</h3>
