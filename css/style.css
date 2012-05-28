@@ -3,4 +3,7 @@ textarea {
   font-family: monospace;
 }
 
+.table td {
+  width: 20px;
+}
 

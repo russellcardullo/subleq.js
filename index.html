@@ -24,6 +24,9 @@
 
     <!-- jQuery via CDN -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"/> </script>
+    <!-- Boostrap script -->
+    <script src="js/bootstrap.js"></script>
+
     <!-- local scripts -->
     <script src="js/cpu.js"></script>
     <script src="js/assembler.js"></script>
@@ -44,10 +47,35 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a data-toggle="modal" href="#about">About</a></li>
             </ul>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="modal hide" id="about">
+      <div class="modal-header">
+        <h3>What is this?</h3>
+      </div>
+      <div class="modal-body">
+        <p>subleq.js is a simulator for the <a href="http://esolangs.org/wiki/Subleq">SUBLEQ</a> language.  The interpreter code is written in Javascript and runs entirely in the browser.</p>
+        <hr/>
+        <h4>Usage</h4>
+          <h5>SUBLEQ</h5>
+            <p>The language accepts a single command:</p>
+            <pre> SUBLEQ A,B,C</pre>
+            <p>This subtracts the contents of memory address A from memory address B and stores the result in B.  If this result is less than or equal to zero then branch to the location C.</p>
+          <h5>Comments</h5>
+            <p>Anything after a semicolon until a linebreak is a comment and ignored</p>
+            <pre>; comments extend to the end of the line</pre>
+          <h5>Labels</h5>
+            <p>You can use labels to make memory addressing easier</p>
+            <pre>baz:               ; any word followed by a colon
+SUBLEQ foo,bar,baz ; subtract foo from bar and jump to baz is LEQ zero</pre>
+          <h5>Data</h5>
+            <p>Use the DATA statement to define a word in memory.</p>
+            <pre>DATA 5      ; emits the value 5 at this location in memory
+foo: DATA 6 ; you can also label the location of data elements </pre>
       </div>
     </div>
     <div class="container">
