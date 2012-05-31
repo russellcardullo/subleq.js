@@ -10,6 +10,12 @@ Usage
     node app.js
     browse to http://localhost:3000
 
+Routes
+------
+
+    localhost:3000              Start with a new program
+    localhost:3000/program/:id  Load program with given ID from the DB
+
 Files
 -----
 
