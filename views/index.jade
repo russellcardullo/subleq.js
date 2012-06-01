@@ -3,13 +3,15 @@ div.navbar.navbar-fixed-top
     div.container
       a(data-toggle='collapse',data-target='.nav-collapse').btn.btn-navbar
         span.icon-bar
-      a(href='#').brand #{title}
+      a(href='#').brand subleq.js
       div.nav-collapse
         ul.nav
-          li.active
-            a(href='#') Home
           li
-            a(href='#about', data-toggle='modal') About
+            a(href='/') New
+          li
+            a(href='/program') Load
+          li
+            a(href='#', onclick="$('#programForm').submit();") Save
           li(id='examples').dropdown
             a(data-toggle='dropdown', href='examples').dropdown-toggle Examples
               b.caret
@@ -20,6 +22,8 @@ div.navbar.navbar-fixed-top
                 a(href='#',onclick="loadProgram('mult.subleq');") Multiply two numbers
               li
                 a(href='#',onclick="loadProgram('sum.subleq');") Sum a series of numbers
+          li
+            a(href='#about', data-toggle='modal') About
 div#about.modal.hide
   div.modal-header
     h3 What is this?
@@ -57,7 +61,9 @@ div.container
     div.span6
       h3 Input Program
       div.program
-        textarea#inputProgram.input-xxlarge
+        form#programForm(action='/program', method='post')
+          input#programId(name='programId', type='hidden', value=id) #{id}
+          textarea#inputProgram(name='inputProgram').input-xxlarge #{program}
       button(onclick="assembleProgram($('#inputProgram').val());") Assemble
     div.span6
       h3 Machine

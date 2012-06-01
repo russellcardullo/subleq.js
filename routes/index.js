@@ -4,5 +4,7 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'subleq.js' })
+  res.render('index', { program: '',
+                        id: '',
+                        title: 'subleq.js' })
 };
