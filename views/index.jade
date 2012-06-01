@@ -1,0 +1,87 @@
+div.navbar.navbar-fixed-top
+  div.navbar-inner
+    div.container
+      a(data-toggle='collapse',data-target='.nav-collapse').btn.btn-navbar
+        span.icon-bar
+      a(href='#').brand #{title}
+      div.nav-collapse
+        ul.nav
+          li.active
+            a(href='#') Home
+          li
+            a(href='#about', data-toggle='modal') About
+          li(id='examples').dropdown
+            a(data-toggle='dropdown', href='examples').dropdown-toggle Examples
+              b.caret
+            ul.dropdown-menu
+              li
+                a(href='#',onclick="loadProgram('add.subleq');") Add two numbers together
+              li
+                a(href='#',onclick="loadProgram('mult.subleq');") Multiply two numbers
+              li
+                a(href='#',onclick="loadProgram('sum.subleq');") Sum a series of numbers
+div#about.modal.hide
+  div.modal-header
+    h3 What is this?
+  div.modal-body
+    p subleq.js is a simulator for the 
+      a(href="http://esolangs.org/wiki/Subleq") SUBLEQ
+      |  language.  The interpreter code is written in Javascript and runs entirely in the browser.
+    hr
+    h4 Usage
+    ol
+      li Enter a program in the Input Program box.  Or select an example from the top menu.
+      li Click assemble.  This will load the program into the simulator memory.
+      li Step through execution using any of the step sizes.
+    h4 Language constructs
+    h5 SUBLEQ
+    p The language accepts a single command:
+    pre SUBLEQ A,B,C
+    p This subtracts the contents of memory address A from memory address B and stores the result in B.  If this result is less than or equal to zero then branch to the location C.
+    h5 Comments
+    p Anything after a semicolon until a linebreak is a comment and ignored:
+    pre ; comments extend to the end of the line
+    h5 Labels
+    p You can use labels to make memory addressing easier:
+    pre.
+      baz:               ; a label is any word followed by a colon 
+      SUBLEQ foo,bar,baz ; subtract foo from bar and jump to baz if LEQ zero
+    h5 Data
+    p Use the DATA statement to define a word in memory.
+    pre.
+      DATA 5      ; emits the value 5 at this location in memory
+      foo: DATA 6 ; you can also label the location of data elements 
+
+div.container
+  div.row
+    div.span6
+      h3 Input Program
+      div.program
+        textarea#inputProgram.input-xxlarge
+      button(onclick="assembleProgram($('#inputProgram').val());") Assemble
+    div.span6
+      h3 Machine
+      form.form-inline
+        div.control-group
+          div.controls
+            label(for='inputPC').control-label Program Counter
+            =' ' 
+            input#inputPC(type='text', value='0').input-mini
+        div.control-group
+          div.controls
+            label.control-label Cycles since reset
+            =' ' 
+            span#cycles.input-mini.uneditable-input 0
+      h4 Memory
+      div#memoryDisplay.memory
+        table#memoryTable.table.table-bordered.table-condensed
+      button(onclick="stepProgram($('#inputPC').val(),'memoryTable',1)") Step x1 
+      =' ' 
+      button(onclick="stepProgram($('#inputPC').val(),'memoryTable',10)") Step x10
+      =' ' 
+      button(onclick="stepProgram($('#inputPC').val(),'memoryTable',100)") Step x100
+      =' ' 
+      button(onclick="resetMachineState();") Reset
+
+script
+  $('.dropdown-toggle').dropdown()
