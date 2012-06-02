@@ -22,11 +22,13 @@ function saveProgram(program, key, callback) {
   client.set(key, program, callback);
 }
 
-function generateKey() {
-  client.incr('program_key');
-  client.get('program_key', function (err, value) {
-    return value;
-  });
+function generateKey(key, callback) {
+  if (key) { 
+    callback('', key); 
+  } else {
+    client.incr('program_key');
+    client.get('program_key', callback);
+  }
 }
 
 exports.loadProgram = loadProgram;

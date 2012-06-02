@@ -14,12 +14,11 @@ exports.load = function(req, res) {
 };
 
 exports.save = function(req, res) {
-  var key = req.body.programId || dataProvider.generateKey();
-  console.log('Saving program with key: ' + key);
-  dataProvider.saveProgram(req.body.inputProgram, key, function(err, value) {
-    res.render('index', { program: req.body.inputProgram,
-                          id: key,
-                          title: 'subleq.js' })
+  dataProvider.generateKey(req.body.programId, function (err, key) {
+    console.log('Saving program with key: ' + key);
+    dataProvider.saveProgram(req.body.inputProgram, key, function(err, value) {
+      res.redirect('/program/' + key);
+    });
   });
 };
 
