@@ -7,14 +7,6 @@ var express = require('express');
 var routes = require('./routes');
 var program = require('./routes/program');
 
-if (process.env.REDISTOGO_URL) {
-  var redisUrl = require('url').parse(process.env.REDISTOGO_URL);
-  var redis = require('redis').createClient(redisUrl.port, redisUrl.hostname);
-  redis.auth(redisUrl.auth.split(':')[1]);
-} else {
-  var redis = require('redis').createClient();
-}
-
 var app = module.exports = express.createServer();
 
 // Configuration
