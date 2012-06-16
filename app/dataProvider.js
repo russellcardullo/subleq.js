@@ -44,8 +44,9 @@ function generateKey(key, callback) {
 }
 
 function listKeys(callback) {
-  client.keys('*',callback);
+  client.hgetall(keyMapName,callback);
 }
+
 exports.loadProgram    = loadProgram;
 exports.saveProgram    = saveProgram;
 exports.generateKey    = generateKey;

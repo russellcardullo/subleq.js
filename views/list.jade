@@ -1,0 +1,32 @@
+div.navbar.navbar-fixed-top
+  div.navbar-inner
+    div.container
+      a(data-toggle='collapse',data-target='.nav-collapse').btn.btn-navbar
+        span.icon-bar
+      a(href='/').brand subleq.js
+      div.nav-collapse
+        ul.nav
+          li
+            a(href='/') New
+          li(id='examples').dropdown
+            a(data-toggle='dropdown', href='examples').dropdown-toggle Examples
+              b.caret
+            ul.dropdown-menu
+              li
+                a(href='#',onclick="loadProgram('add.subleq');") Add two numbers together
+              li
+                a(href='#',onclick="loadProgram('mult.subleq');") Multiply two numbers
+              li
+                a(href='#',onclick="loadProgram('sum.subleq');") Sum a series of numbers
+
+div.container
+  div.row
+    div.span6
+      h3 Programs
+      each val, key in programList
+        li
+          a(href='/program/' + key) #{key}: #{val}
+
+
+script
+  $('.dropdown-toggle').dropdown()

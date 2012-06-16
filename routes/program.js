@@ -32,6 +32,9 @@ exports.save = function(req, res) {
 exports.list = function(req, res) {
   dataProvider.listKeys(function (err, value) {
     console.log(value);
+    res.render('list', { programList: value,
+                          title: 'subleq.js' })
+
   });
 
 };
