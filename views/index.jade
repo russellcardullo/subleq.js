@@ -11,7 +11,7 @@ div.navbar.navbar-fixed-top
           li
             a(href='/program') Load
           li
-            a(href='#', onclick="$('#programForm').submit();") Save
+            a(href='#save', onclick="$('#programForm').submit();") Save
           li(id='examples').dropdown
             a(data-toggle='dropdown', href='examples').dropdown-toggle Examples
               b.caret
@@ -56,12 +56,16 @@ div#about.modal.hide
       DATA 5      ; emits the value 5 at this location in memory
       foo: DATA 6 ; you can also label the location of data elements 
 
+
 div.container
   div.row
     div.span6
       h3 Input Program
       div.program
-        form#programForm(action='/program', method='post')
+        form#programForm(action='/program', method='post').form-inline
+          label(for='programName').control-label Name
+          =' '
+          input#programName(name='programName', type='text', value=programName).input-large #{programName}
           input#programId(name='programId', type='hidden', value=id) #{id}
           textarea#inputProgram(name='inputProgram').input-xxlarge #{program}
       button(onclick="assembleProgram($('#inputProgram').val());") Assemble
@@ -88,6 +92,7 @@ div.container
       button(onclick="stepProgram($('#inputPC').val(),'memoryTable',100)") Step x100
       =' ' 
       button(onclick="resetMachineState();") Reset
+
 
 script
   $('.dropdown-toggle').dropdown()

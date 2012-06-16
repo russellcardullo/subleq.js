@@ -31,7 +31,7 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', routes.index);
-app.get('/program', program.load);
+app.get('/program', program.list);
 app.get('/program/:id', program.load);
 app.post('/program', program.save);
 

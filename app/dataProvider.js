@@ -1,5 +1,7 @@
 var redis = require('redis');
 
+var keyMapName = 'keymap';
+
 if (process.env.REDISTOGO_URL) {
   var redisUrl = require('url').parse(process.env.REDISTOGO_URL);
   console.log('Connecting to remote redis server ' + redisUrl.hostname + ':' + redisUrl.port);
@@ -18,9 +20,19 @@ function loadProgram(id,callback) {
   client.get(id, callback);
 }
 
+function getProgramName(id,callback) {
+  client.hget(keyMapName, id, callback);
+}
+
 function saveProgram(program, key, callback) {
   client.set(key, program, callback);
 }
+
+function saveKeyMap(key, description, callback) {
+  console.log('Saving ' + description + ' with key ' + key);
+  client.hset(keyMapName, key, description, callback);
+}
+
 
 function generateKey(key, callback) {
   if (key) { 
@@ -31,7 +43,13 @@ function generateKey(key, callback) {
   }
 }
 
-exports.loadProgram = loadProgram;
-exports.saveProgram = saveProgram;
-exports.generateKey = generateKey;
+function listKeys(callback) {
+  client.keys('*',callback);
+}
+exports.loadProgram    = loadProgram;
+exports.saveProgram    = saveProgram;
+exports.generateKey    = generateKey;
+exports.listKeys       = listKeys;
+exports.saveKeyMap     = saveKeyMap;
+exports.getProgramName = getProgramName;
 

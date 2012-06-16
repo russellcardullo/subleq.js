@@ -7,18 +7,32 @@ var dataProvider = require('../app/dataProvider');
 
 exports.load = function(req, res) {
   dataProvider.loadProgram(req.params.id, function(err, value) {
-    res.render('index', { program: value,
-                          id: req.params.id,
-                          title: 'subleq.js' })
+    var programText = value;
+    dataProvider.getProgramName(req.params.id, function(err, value) {
+      console.log('Found name: ' + value + ' for key: ' + req.params.id);
+      res.render('index', { program: programText,
+                            id: req.params.id,
+                            programName: value,
+                            title: 'subleq.js' })
+    });
   });
 };
 
 exports.save = function(req, res) {
   dataProvider.generateKey(req.body.programId, function (err, key) {
-    console.log('Saving program with key: ' + key);
+    console.log('Saving program with key: ' + key + ' and name: ' + req.body.programName);
     dataProvider.saveProgram(req.body.inputProgram, key, function(err, value) {
-      res.redirect('/program/' + key);
+      dataProvider.saveKeyMap(key,req.body.programName, function(err, value) {
+        res.redirect('/program/' + key);
+      });
     });
   });
+};
+
+exports.list = function(req, res) {
+  dataProvider.listKeys(function (err, value) {
+    console.log(value);
+  });
+
 };
 
