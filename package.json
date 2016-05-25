@@ -4,7 +4,7 @@
   , "private": true
   , "dependencies": {
       "express": "2.5.8"
-    , "jade": ">= 0.0.1"
-    , "redis": ">= 0.0.1"
+    , "jade": "1.11.0"
+    , "redis": "2.6.0-2"
   }
 }
