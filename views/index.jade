@@ -65,9 +65,9 @@ div.container
         form#programForm(action='/program', method='post').form-inline
           label(for='programName').control-label Name
           =' '
-          input#programName(name='programName', type='text', value=programName).input-large #{programName}
-          input#programId(name='programId', type='hidden', value=id) #{id}
-          textarea#inputProgram(name='inputProgram').input-xxlarge #{program}
+          input#programName(name='programName', type='text', value=programName).input-large
+          input#programId(name='programId', type='hidden', value=id)
+          textarea#inputProgram(name='inputProgram', value=program).input-xxlarge
       button(onclick="assembleProgram($('#inputProgram').val());") Assemble
     div.span6
       h3 Machine
