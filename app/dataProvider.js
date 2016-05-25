@@ -33,7 +33,6 @@ function saveKeyMap(key, description, callback) {
   client.hset(keyMapName, key, description, callback);
 }
 
-
 function generateKey(key, callback) {
   if (key) { 
     callback('', key); 
@@ -53,4 +52,3 @@ exports.generateKey    = generateKey;
 exports.listKeys       = listKeys;
 exports.saveKeyMap     = saveKeyMap;
 exports.getProgramName = getProgramName;
-

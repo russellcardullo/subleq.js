@@ -1,19 +1,22 @@
-
-function CPU(programCounterIn, memoryIn ) {
+function CPU(programCounterIn, memoryIn) {
   var programCounter = programCounterIn;
   var memory = memoryIn;
+
   this.getPC = function() {
     return programCounter;
   };
+
   this.getMemory = function() {
     return memory;
   };
+
   this.run = function() {
     var halt = false;
     while (halt === false) {
       halt = this.step();
     }
   };
+
   this.step = function() {
     var halt = false;
     if (programCounter >= 0 && programCounter < memory.length) {
@@ -37,6 +40,7 @@ function CPU(programCounterIn, memoryIn ) {
     this.dumpMemory();
     return halt;
   };
+
   this.dumpMemory = function() {
     var i = 0;
     var outstr = i + ':  ';
@@ -50,5 +54,3 @@ function CPU(programCounterIn, memoryIn ) {
     console.log(outstr);
   };
 }
-
-

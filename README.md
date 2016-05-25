@@ -28,4 +28,3 @@ Files
 * assembler.js is an assembler.  This takes assembly language and produces an integer array.
 * io.js handles input and output with an HTML page.
 * index.html is a static page which hosts the application.
-

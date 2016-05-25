@@ -1,4 +1,3 @@
-
 function resetMachineState() {
   $('#inputPC').val(0);
   $('#memoryDisplay').html(memoryArrayToTable([]));
@@ -15,7 +14,6 @@ function assembleProgram(input) {
   } else {
     alert ('error assembling');
   }
-  
 }
 
 function stepProgram(inputPC, inputMemoryId, steps) {
@@ -140,8 +138,4 @@ var examplePrograms = {
                  "B: DATA 7\n" +
                  "C: DATA 0\n" +
                  "end:\n", 
-
 }
-
-              
-

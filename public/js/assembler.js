@@ -1,14 +1,14 @@
-
-
 // Takes test subleq assembly language input and 
 // returns compiled binary array
 function assemble(input) {
   var assembledInput = [];
   lines = input.split('\n');
+
   var symbolTable = buildSymbolTable(lines);
   if (symbolTable === undefined) {
     return undefined;
   }
+
   var position = 0;
   for (var i = 0; i < lines.length; i++) {
     var instruction = lexer(lines[i]);
@@ -24,6 +24,7 @@ function assemble(input) {
   }
   return assembledInput;
 }
+
 function buildSymbolTable(lines) {
   var location = 0;
   var symbolTable = {};
@@ -86,7 +87,7 @@ function lexer(line) {
   }
 }
 
-function parse(instruction,symbolTable,position) {
+function parse(instruction, symbolTable, position) {
   var parsedInstruction = []
   if (instruction.operation === 'SUBLEQ') {
     parsedInstruction.push(operandValue(instruction.operand1,symbolTable));
@@ -103,7 +104,7 @@ function parse(instruction,symbolTable,position) {
   return parsedInstruction;
 }
 
-function operandValue(operand,symbolTable) {
+function operandValue(operand, symbolTable) {
   if (operand === undefined) {
     return null;
   }
@@ -120,37 +121,3 @@ function operandValue(operand,symbolTable) {
   }
   return value;
 }
-
-//input = "subleq 0,0,0 \n \
-//         subleq 1,1,1";
-
-//console.log(assemble(input));
-
-// ADD a, b == subleq a,Z
-//             subleq Z,b
-//             subleq Z,Z
-
-//0  ADD 3, 4 == subleq a,Z (10,9,3)
-//3              subleq Z,b (9,11,6)
-//6              subleq Z,Z (9,9,-1)
-//9  Z           0
-//10 a           3
-//11 b           4
-
-//memory = [10,9,3,9,11,6,9,9,-1,0,3,4]
-
-// start
-//0 ADD 2,A   == subleq 2,Z (14,12,3)
-//3           == subleq Z,A (12,13,6)
-//6           == subleq Z,Z (12,12,9)
-//9 JMP start == subleq Z,Z,start (12,12,0)
-//12 Z          (0)
-//13 A          (0)
-//14 2          (2)
-
-//memory = [14,12,3,12,13,6,12,12,9,12,12,0,0,0,2]
-
-
-
-
-

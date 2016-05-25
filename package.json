@@ -1,10 +1,10 @@
 {
-    "name": "subleq.js"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "express": "2.5.8"
-    , "jade": "1.11.0"
-    , "redis": "2.6.0-2"
+  "name": "subleq.js",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "2.5.8",
+    "jade": "1.11.0",
+    "redis": "2.6.0-2"
   }
 }
