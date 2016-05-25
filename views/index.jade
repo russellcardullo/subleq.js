@@ -42,6 +42,9 @@ div#about.modal.hide
     p The language accepts a single command:
     pre SUBLEQ A,B,C
     p This subtracts the contents of memory address A from memory address B and stores the result in B.  If this result is less than or equal to zero then branch to the location C.
+    p The assembler also allows for leaving off the C argument:
+    pre SUBLEQ A,B
+    p In this case the assembler will assign a value of C equivalent to the next memory location after this instruction.  This can be used in cases where you want to perform subtraction without branching.
     h5 Comments
     p Anything after a semicolon until a linebreak is a comment and ignored:
     pre ; comments extend to the end of the line
